@@ -132,7 +132,7 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         BLUEddystoneUIDBeacon *eddystoneBeacon = (BLUEddystoneUIDBeacon *)beacon;
         
       //  if(eddystoneBeacon && eddystoneBeacon.identifier)
-            NSLog(@"Test : %@\n", [eddystoneBeacon.identifier.namespaceIdentifier hexStringRepresentation]);
+            NSLog(@"Test : %@\n", eddystoneBeacon.identifier);
         
         if([[eddystoneBeacon.identifier.namespaceIdentifier hexStringRepresentation] isEqualToString:@"AABBCCDDEEFFAABBCCDD"])
         {
@@ -282,13 +282,16 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         [self.beaconManager stopScanning];
     }
 
-    NSComparisonResult (^comparitor)(BLUBeacon *beacon1, BLUBeacon *beacon2) = ^NSComparisonResult(BLUBeacon *beacon1, BLUBeacon *beacon2) {
+    NSComparisonResult (^comparitor)(BLUBeacon *beacon1, BLUBeacon *beacon2) = ^NSComparisonResult(BLUBeacon *beacon1, BLUBeacon *beacon2)
+    {
 
-        if (beacon1.distance == BLUDistanceUnknown) {
+        if (beacon1.distance == BLUDistanceUnknown)
+        {
             return NSOrderedDescending;
         }
 
-        if (beacon2.distance == BLUDistanceUnknown) {
+        if (beacon2.distance == BLUDistanceUnknown)
+        {
             return NSOrderedAscending;
         }
 
@@ -298,10 +301,12 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
 
             return [rssi2 compare:rssi1];
         }
-        else if (beacon1.distance > beacon2.distance) {
+        else if (beacon1.distance > beacon2.distance)
+        {
             return NSOrderedDescending;
         }
-        else if (beacon1.distance < beacon2.distance) {
+        else if (beacon1.distance < beacon2.distance)
+        {
             return NSOrderedAscending;
         }
 
@@ -343,7 +348,8 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     BLUBeaconCell *cell = (BLUBeaconCell *)[tableView dequeueReusableCellWithIdentifier:@"BeaconCell" forIndexPath:indexPath];
 
     NSArray *beaconList = nil;
@@ -375,7 +381,11 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         cellTitle = ((BLUBluetoothBeacon *)beacon).name;
     }
     
-    cell.topLabel.text = [NSString stringWithFormat:@"%@ : Test2", cellTitle];
+    BLUEddystoneUIDBeacon *eddystoneBeacon = (BLUEddystoneUIDBeacon *)beacon;
+    
+    NSLog(@"Refreshing?\n");
+    
+    cell.topLabel.text = [self getName:eddystoneBeacon];
     cell.rightLabel.text = [NSString stringWithFormat:@"%li dBm", (long)[beacon.RSSI integerValue]];
     if ([beacon isKindOfClass:[BLUMotionBeacon class]])
     {
@@ -466,8 +476,10 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     [self resetScan];
 }
 
-- (void)resetScan {
-    if ([self.beaconManager isScanning]) {
+- (void)resetScan
+{
+    if ([self.beaconManager isScanning])
+    {
         NSLog(@"Resetting beacon scan");
         [self.beaconManager stopScanning];
         [self.beaconManager startScanningForBeacons];
@@ -495,10 +507,10 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
 }
 
 - (void)beaconManager:(BLUBeaconManager *)manager beacon:(BLUBeacon *)beacon didChangeDistance:(BLUDistance)distance
-    {
+{
     BLUBluetoothBeacon *bBeacon = (BLUBluetoothBeacon *)beacon;
     NSIndexPath *indexPath = nil;
-    if ([self.configurableBeacons containsObject:beacon])
+   /* if ([self.configurableBeacons containsObject:beacon])
     {
         NSInteger row = [self.configurableBeacons indexOfObject:beacon];
         if (row != NSNotFound && row < [self.configurableBeacons count])
@@ -506,7 +518,7 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
             indexPath = [NSIndexPath indexPathForRow:row inSection:BLUBeaconListSectionConfigurable];
         }
     }
-    else if ([self.eddystoneBeacons containsObject:beacon])
+    else */if ([self.eddystoneBeacons containsObject:beacon])
     {
         NSInteger row = [self.eddystoneBeacons indexOfObject:beacon];
         if (row != NSNotFound && row < [self.eddystoneBeacons count])
@@ -514,14 +526,14 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
             indexPath = [NSIndexPath indexPathForRow:row inSection:BLUBeaconListSectionEddystone];
         }
     }
-    else if ([self.optionalBeacons containsObject:beacon])
+   /* else if ([self.optionalBeacons containsObject:beacon])
     {
         NSInteger row = [self.optionalBeacons indexOfObject:beacon];
         if (row != NSNotFound && row < [self.optionalBeacons count])
         {
             indexPath = [NSIndexPath indexPathForRow:row inSection:BLUBeaconListSectionOptional];
         }
-    }
+    }*/
     
     // Where the cells are configured
     
@@ -536,9 +548,19 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     
     if (indexPath && [beacon isKindOfClass:[BLUEddystoneUIDBeacon class]])
     {
+        NSString *deviceName = [[UIDevice currentDevice] name];
+        
+        
         BLUBeaconCell *cell = (BLUBeaconCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         
-        cell.topLabel.text = [NSString stringWithFormat:@"%@ : Test", bBeacon.name];
+        BLUEddystoneUIDBeacon *eddystoneBeacon = (BLUEddystoneUIDBeacon *)bBeacon;
+        unsigned int outVal;
+        NSScanner* scanner = [NSScanner scannerWithString:[eddystoneBeacon.identifier.instanceIdentifier hexStringRepresentation]];
+        [scanner scanHexInt:&outVal];
+        
+        NSLog(@"Refreshing2?\n");
+        [self insertCheckin:deviceName beaconID:outVal];
+        cell.topLabel.text = [self getName:eddystoneBeacon];
         cell.rightLabel.text = [NSString stringWithFormat:@"%li dBm", (long)[bBeacon.RSSI integerValue]];
         if (![beacon isKindOfClass:[BLUMotionBeacon class]] &&
             ![beacon isKindOfClass:[BLULightSensorBeacon class]]) {
@@ -675,6 +697,96 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         [self.beaconManager requestStateForRegion:region];
         [self.pendingIBeaconRegions removeObject:region];
     }
+}
+
+-(NSString *) getName: (BLUEddystoneUIDBeacon *) eddystoneBeacon
+{
+    unsigned int outVal;
+    NSScanner* scanner = [NSScanner scannerWithString:[eddystoneBeacon.identifier.instanceIdentifier hexStringRepresentation]];
+    [scanner scanHexInt:&outVal];
+    
+    return [NSString stringWithFormat:@"Box #%d", outVal];
+}
+
+-(void) insertCheckin: (NSString *) deviceName beaconID:(int) beaconID
+{
+    NSLog(@"Checking In: %@ :: %d", deviceName, beaconID);
+    
+    NSString *post = [NSString stringWithFormat:@"deviceName=%@&beaconID=%d",deviceName, beaconID];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:@"http://freeman.brooksmcmillin.com/api/checkin.php"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+   NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    NSData * data = [NSURLConnection sendSynchronousRequest:request
+                                          returningResponse:&response
+                                                      error:&error];
+    
+    if (error == nil)
+    {
+        NSLog([NSString stringWithFormat:@"Response: %@", response]);
+    }
+    else
+    {
+        NSLog([NSString stringWithFormat:@"Error: %@", error]);
+    }
+    
+    if(conn)
+        NSLog(@"Success?");
+    else
+        NSLog(@"Error?");
+    
+   /* NSURL* URL = [NSURL URLWithString:@"http://freeman.brooksmcmillin.com/api/checkin.php"];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+    request.HTTPMethod = @"POST";
+    // Form URL-Encoded Body
+    
+    NSDictionary* bodyParameters = @{
+                                     @"deviceName": deviceName,
+                                     @"beaconID": [NSString stringWithFormat:@"%d", beaconID]
+                                     };
+    request.HTTPBody = [[self NSStringFromQueryParameters:bodyParameters] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    // Connection
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:nil];
+    [connection start];
+    
+    // Initialize the NSURLConnection and proceed as described in
+    // Retrieving the Contents of a URL
+    
+   /* NSString *post = [NSString stringWithFormat:@"deviceName=%@&beaconID=%d", deviceName, beaconID];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:@"http://freeman.brooksmcmillin.com/api/checkin.php"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];*/
+}
+
+-(NSString*) NSStringFromQueryParameters: (NSDictionary*) queryParameters
+{
+    NSMutableArray* parts = [NSMutableArray array];
+    [queryParameters enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+        NSString *part = [NSString stringWithFormat: @"%@=%@",
+                          [key stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding],
+                          [value stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]
+                          ];
+        [parts addObject:part];
+    }];
+    return [parts componentsJoinedByString: @"&"];
 }
 
 @end
