@@ -1,0 +1,623 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		198F92AE86734623764C86C3 /* Bluvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D62DB73725BF8A550F28DA5 /* Bluvision.framework */; };
+		42106CC71C931A9500FCCBC4 /* BLUAccelerometerSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42106CC61C931A9500FCCBC4 /* BLUAccelerometerSettingsTableViewController.m */; };
+		4224C24C1B3D9D5C00C7FC33 /* bleTag_cc_27_nl_enc_371.bin in Resources */ = {isa = PBXBuildFile; fileRef = 4224C2491B3D9D5C00C7FC33 /* bleTag_cc_27_nl_enc_371.bin */; };
+		4224C2501B3D9D5C00C7FC33 /* bleTag27_enc_363.bin in Resources */ = {isa = PBXBuildFile; fileRef = 4224C24B1B3D9D5C00C7FC33 /* bleTag27_enc_363.bin */; };
+		42517AB31B4ECEE400657215 /* NSData+String.m in Sources */ = {isa = PBXBuildFile; fileRef = 42517AB21B4ECEE400657215 /* NSData+String.m */; };
+		42517AB41B4ECEE400657215 /* NSData+String.m in Sources */ = {isa = PBXBuildFile; fileRef = 42517AB21B4ECEE400657215 /* NSData+String.m */; };
+		42A295EA1C6B94AA00530B84 /* firmware-380.sfw in Resources */ = {isa = PBXBuildFile; fileRef = 42A295E91C6B94AA00530B84 /* firmware-380.sfw */; };
+		42F069B81CA9B70A0006A15C /* IntervalPickerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F069B71CA9B70A0006A15C /* IntervalPickerDataSource.m */; };
+		49040AE41AC2FC980069E0CD /* BLUTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49040AE31AC2FC980069E0CD /* BLUTextFieldCell.m */; };
+		49040AE71AC30EDB0069E0CD /* BLUBeaconConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49040AE61AC30EDB0069E0CD /* BLUBeaconConfigurationViewController.m */; };
+		490A1A9D1BB940EB0016453F /* fwload_bleTag_cc_27_nl_enc.bin in Resources */ = {isa = PBXBuildFile; fileRef = 490A1A9C1BB940EB0016453F /* fwload_bleTag_cc_27_nl_enc.bin */; };
+		4915D5311BBD69D5006EC380 /* bleTag_enc_363.bin in Resources */ = {isa = PBXBuildFile; fileRef = 4915D5301BBD69D5006EC380 /* bleTag_enc_363.bin */; };
+		4915D5331BBD7065006EC380 /* firmware.sfw in Resources */ = {isa = PBXBuildFile; fileRef = 4915D5321BBD7065006EC380 /* firmware.sfw */; };
+		49EEDDEE1AC086CC00C734BA /* BLUBeaconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EEDDED1AC086CC00C734BA /* BLUBeaconCell.m */; };
+		49F1C4021ABB07F0001F8596 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F1C4011ABB07F0001F8596 /* main.m */; };
+		49F1C4051ABB07F0001F8596 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F1C4041ABB07F0001F8596 /* AppDelegate.m */; };
+		49F1C40B1ABB07F0001F8596 /* BLUBeaconDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F1C40A1ABB07F0001F8596 /* BLUBeaconDetailViewController.m */; };
+		49F1C40E1ABB07F0001F8596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F1C40C1ABB07F0001F8596 /* Main.storyboard */; };
+		49F1C4101ABB07F0001F8596 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F1C40F1ABB07F0001F8596 /* Images.xcassets */; };
+		49F1C4131ABB07F0001F8596 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F1C4111ABB07F0001F8596 /* LaunchScreen.xib */; };
+		49F1C41F1ABB07F0001F8596 /* blubeacon_ios_testappTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F1C41E1ABB07F0001F8596 /* blubeacon_ios_testappTests.m */; };
+		49F1C42A1ABB0863001F8596 /* BLUBeaconListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F1C4291ABB0863001F8596 /* BLUBeaconListViewController.m */; };
+		49F2FE441AC161410008D406 /* BLUTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F2FE431AC161410008D406 /* BLUTableViewCell.m */; };
+		49F366701AC41B7C0036BC81 /* BLUPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F3666F1AC41B7C0036BC81 /* BLUPickerCell.m */; };
+		49F366731AC41D9C0036BC81 /* BLUBeaconAdvancedSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F366721AC41D9C0036BC81 /* BLUBeaconAdvancedSettingsViewController.m */; };
+		49F366781AC4240C0036BC81 /* BLUBeaconFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F366771AC4240C0036BC81 /* BLUBeaconFormatter.m */; };
+		49F8AC371AC949F70017FBE6 /* BLUIBeaconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AC361AC949F70017FBE6 /* BLUIBeaconViewController.m */; };
+		49F8AC3A1AC966900017FBE6 /* BLUHexKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AC391AC966900017FBE6 /* BLUHexKeyboard.m */; };
+		49F8AC3F1AC96A1F0017FBE6 /* BLUMajorMinorTextFieldHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AC3C1AC96A1F0017FBE6 /* BLUMajorMinorTextFieldHelper.m */; };
+		49F8AC401AC96A1F0017FBE6 /* BLUUUIDTextFieldHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AC3E1AC96A1F0017FBE6 /* BLUUUIDTextFieldHelper.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		49F1C4191ABB07F0001F8596 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49F1C3F41ABB07F0001F8596 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 49F1C3FB1ABB07F0001F8596;
+			remoteInfo = "blubeacon-ios-testapp";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		42106CC51C931A9500FCCBC4 /* BLUAccelerometerSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUAccelerometerSettingsTableViewController.h; sourceTree = "<group>"; };
+		42106CC61C931A9500FCCBC4 /* BLUAccelerometerSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUAccelerometerSettingsTableViewController.m; sourceTree = "<group>"; };
+		4224C2491B3D9D5C00C7FC33 /* bleTag_cc_27_nl_enc_371.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = bleTag_cc_27_nl_enc_371.bin; sourceTree = "<group>"; };
+		4224C24B1B3D9D5C00C7FC33 /* bleTag27_enc_363.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = bleTag27_enc_363.bin; sourceTree = "<group>"; };
+		42517AB11B4ECEE400657215 /* NSData+String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+String.h"; sourceTree = "<group>"; };
+		42517AB21B4ECEE400657215 /* NSData+String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+String.m"; sourceTree = "<group>"; };
+		42A295E91C6B94AA00530B84 /* firmware-380.sfw */ = {isa = PBXFileReference; lastKnownFileType = file; path = "firmware-380.sfw"; sourceTree = "<group>"; };
+		42CED2781B00F92B00A8F16F /* blubeacon-ios-testapp copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "blubeacon-ios-testapp copy-Info.plist"; path = "/Users/jasonclary/Developer/BluVision/blubeacon-ios-test-app/blubeacon-ios-testapp/blubeacon-ios-testapp copy-Info.plist"; sourceTree = "<absolute>"; };
+		42F069B61CA9B70A0006A15C /* IntervalPickerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalPickerDataSource.h; sourceTree = "<group>"; };
+		42F069B71CA9B70A0006A15C /* IntervalPickerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalPickerDataSource.m; sourceTree = "<group>"; };
+		49040AE21AC2FC980069E0CD /* BLUTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUTextFieldCell.h; sourceTree = "<group>"; };
+		49040AE31AC2FC980069E0CD /* BLUTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUTextFieldCell.m; sourceTree = "<group>"; };
+		49040AE51AC30EDB0069E0CD /* BLUBeaconConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUBeaconConfigurationViewController.h; sourceTree = "<group>"; };
+		49040AE61AC30EDB0069E0CD /* BLUBeaconConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUBeaconConfigurationViewController.m; sourceTree = "<group>"; };
+		490A1A9C1BB940EB0016453F /* fwload_bleTag_cc_27_nl_enc.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = fwload_bleTag_cc_27_nl_enc.bin; sourceTree = "<group>"; };
+		4915D5301BBD69D5006EC380 /* bleTag_enc_363.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = bleTag_enc_363.bin; sourceTree = "<group>"; };
+		4915D5321BBD7065006EC380 /* firmware.sfw */ = {isa = PBXFileReference; lastKnownFileType = file; path = firmware.sfw; sourceTree = "<group>"; };
+		49EEDDEC1AC086CC00C734BA /* BLUBeaconCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUBeaconCell.h; sourceTree = "<group>"; };
+		49EEDDED1AC086CC00C734BA /* BLUBeaconCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUBeaconCell.m; sourceTree = "<group>"; };
+		49F1C3FC1ABB07F0001F8596 /* blubeacon-ios-testapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "blubeacon-ios-testapp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49F1C4001ABB07F0001F8596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49F1C4011ABB07F0001F8596 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		49F1C4031ABB07F0001F8596 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		49F1C4041ABB07F0001F8596 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		49F1C4091ABB07F0001F8596 /* BLUBeaconDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLUBeaconDetailViewController.h; sourceTree = "<group>"; };
+		49F1C40A1ABB07F0001F8596 /* BLUBeaconDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLUBeaconDetailViewController.m; sourceTree = "<group>"; };
+		49F1C40D1ABB07F0001F8596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		49F1C40F1ABB07F0001F8596 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		49F1C4121ABB07F0001F8596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		49F1C4181ABB07F0001F8596 /* blubeacon-ios-testappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "blubeacon-ios-testappTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49F1C41D1ABB07F0001F8596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49F1C41E1ABB07F0001F8596 /* blubeacon_ios_testappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = blubeacon_ios_testappTests.m; sourceTree = "<group>"; };
+		49F1C4281ABB0863001F8596 /* BLUBeaconListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUBeaconListViewController.h; sourceTree = "<group>"; };
+		49F1C4291ABB0863001F8596 /* BLUBeaconListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUBeaconListViewController.m; sourceTree = "<group>"; };
+		49F2FE421AC161410008D406 /* BLUTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUTableViewCell.h; sourceTree = "<group>"; };
+		49F2FE431AC161410008D406 /* BLUTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUTableViewCell.m; sourceTree = "<group>"; };
+		49F3666E1AC41B7C0036BC81 /* BLUPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUPickerCell.h; sourceTree = "<group>"; };
+		49F3666F1AC41B7C0036BC81 /* BLUPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUPickerCell.m; sourceTree = "<group>"; };
+		49F366711AC41D9C0036BC81 /* BLUBeaconAdvancedSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUBeaconAdvancedSettingsViewController.h; sourceTree = "<group>"; };
+		49F366721AC41D9C0036BC81 /* BLUBeaconAdvancedSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUBeaconAdvancedSettingsViewController.m; sourceTree = "<group>"; };
+		49F366751AC41E260036BC81 /* BLUBeaconConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUBeaconConstants.h; sourceTree = "<group>"; };
+		49F366761AC4240C0036BC81 /* BLUBeaconFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUBeaconFormatter.h; sourceTree = "<group>"; };
+		49F366771AC4240C0036BC81 /* BLUBeaconFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUBeaconFormatter.m; sourceTree = "<group>"; };
+		49F8AC351AC949F70017FBE6 /* BLUIBeaconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUIBeaconViewController.h; sourceTree = "<group>"; };
+		49F8AC361AC949F70017FBE6 /* BLUIBeaconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUIBeaconViewController.m; sourceTree = "<group>"; };
+		49F8AC381AC966900017FBE6 /* BLUHexKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUHexKeyboard.h; sourceTree = "<group>"; };
+		49F8AC391AC966900017FBE6 /* BLUHexKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUHexKeyboard.m; sourceTree = "<group>"; };
+		49F8AC3B1AC96A1F0017FBE6 /* BLUMajorMinorTextFieldHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUMajorMinorTextFieldHelper.h; sourceTree = "<group>"; };
+		49F8AC3C1AC96A1F0017FBE6 /* BLUMajorMinorTextFieldHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUMajorMinorTextFieldHelper.m; sourceTree = "<group>"; };
+		49F8AC3D1AC96A1F0017FBE6 /* BLUUUIDTextFieldHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUUUIDTextFieldHelper.h; sourceTree = "<group>"; };
+		49F8AC3E1AC96A1F0017FBE6 /* BLUUUIDTextFieldHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUUUIDTextFieldHelper.m; sourceTree = "<group>"; };
+		8D62DB73725BF8A550F28DA5 /* Bluvision.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; path = Bluvision.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49F1C3F91ABB07F0001F8596 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				198F92AE86734623764C86C3 /* Bluvision.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49F1C4151ABB07F0001F8596 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		49EEDDEB1AC086AB00C734BA /* TableView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				49F2FE421AC161410008D406 /* BLUTableViewCell.h */,
+				49F2FE431AC161410008D406 /* BLUTableViewCell.m */,
+				49EEDDEC1AC086CC00C734BA /* BLUBeaconCell.h */,
+				49EEDDED1AC086CC00C734BA /* BLUBeaconCell.m */,
+				49040AE21AC2FC980069E0CD /* BLUTextFieldCell.h */,
+				49040AE31AC2FC980069E0CD /* BLUTextFieldCell.m */,
+				49F3666E1AC41B7C0036BC81 /* BLUPickerCell.h */,
+				49F3666F1AC41B7C0036BC81 /* BLUPickerCell.m */,
+			);
+			name = "TableView Cells";
+			sourceTree = "<group>";
+		};
+		49F1C3F31ABB07F0001F8596 = {
+			isa = PBXGroup;
+			children = (
+				49F1C3FE1ABB07F0001F8596 /* blubeacon-ios-testapp */,
+				49F1C41B1ABB07F0001F8596 /* blubeacon-ios-testappTests */,
+				49F1C3FD1ABB07F0001F8596 /* Products */,
+				8D62DB73725BF8A550F28DA5 /* Bluvision.framework */,
+			);
+			sourceTree = "<group>";
+		};
+		49F1C3FD1ABB07F0001F8596 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49F1C3FC1ABB07F0001F8596 /* blubeacon-ios-testapp.app */,
+				49F1C4181ABB07F0001F8596 /* blubeacon-ios-testappTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49F1C3FE1ABB07F0001F8596 /* blubeacon-ios-testapp */ = {
+			isa = PBXGroup;
+			children = (
+				49F207CB1ADD59EA009B1D50 /* Firmware Files */,
+				49F366741AC41E020036BC81 /* Helpers */,
+				49EEDDEB1AC086AB00C734BA /* TableView Cells */,
+				49F1C4031ABB07F0001F8596 /* AppDelegate.h */,
+				49F1C4041ABB07F0001F8596 /* AppDelegate.m */,
+				49F1C4281ABB0863001F8596 /* BLUBeaconListViewController.h */,
+				49F1C4291ABB0863001F8596 /* BLUBeaconListViewController.m */,
+				49F8AC351AC949F70017FBE6 /* BLUIBeaconViewController.h */,
+				49F8AC361AC949F70017FBE6 /* BLUIBeaconViewController.m */,
+				49F1C4091ABB07F0001F8596 /* BLUBeaconDetailViewController.h */,
+				49F1C40A1ABB07F0001F8596 /* BLUBeaconDetailViewController.m */,
+				49040AE51AC30EDB0069E0CD /* BLUBeaconConfigurationViewController.h */,
+				49040AE61AC30EDB0069E0CD /* BLUBeaconConfigurationViewController.m */,
+				49F366711AC41D9C0036BC81 /* BLUBeaconAdvancedSettingsViewController.h */,
+				49F366721AC41D9C0036BC81 /* BLUBeaconAdvancedSettingsViewController.m */,
+				42106CC51C931A9500FCCBC4 /* BLUAccelerometerSettingsTableViewController.h */,
+				42106CC61C931A9500FCCBC4 /* BLUAccelerometerSettingsTableViewController.m */,
+				49F1C40C1ABB07F0001F8596 /* Main.storyboard */,
+				49F1C40F1ABB07F0001F8596 /* Images.xcassets */,
+				49F1C4111ABB07F0001F8596 /* LaunchScreen.xib */,
+				49F1C3FF1ABB07F0001F8596 /* Supporting Files */,
+			);
+			path = "blubeacon-ios-testapp";
+			sourceTree = "<group>";
+		};
+		49F1C3FF1ABB07F0001F8596 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				42CED2781B00F92B00A8F16F /* blubeacon-ios-testapp copy-Info.plist */,
+				49F1C4001ABB07F0001F8596 /* Info.plist */,
+				49F1C4011ABB07F0001F8596 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		49F1C41B1ABB07F0001F8596 /* blubeacon-ios-testappTests */ = {
+			isa = PBXGroup;
+			children = (
+				49F1C41E1ABB07F0001F8596 /* blubeacon_ios_testappTests.m */,
+				49F1C41C1ABB07F0001F8596 /* Supporting Files */,
+			);
+			path = "blubeacon-ios-testappTests";
+			sourceTree = "<group>";
+		};
+		49F1C41C1ABB07F0001F8596 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				49F1C41D1ABB07F0001F8596 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		49F207CB1ADD59EA009B1D50 /* Firmware Files */ = {
+			isa = PBXGroup;
+			children = (
+				42A295E91C6B94AA00530B84 /* firmware-380.sfw */,
+				4915D5301BBD69D5006EC380 /* bleTag_enc_363.bin */,
+				4224C2491B3D9D5C00C7FC33 /* bleTag_cc_27_nl_enc_371.bin */,
+				4224C24B1B3D9D5C00C7FC33 /* bleTag27_enc_363.bin */,
+				490A1A9C1BB940EB0016453F /* fwload_bleTag_cc_27_nl_enc.bin */,
+				4915D5321BBD7065006EC380 /* firmware.sfw */,
+			);
+			name = "Firmware Files";
+			sourceTree = "<group>";
+		};
+		49F366741AC41E020036BC81 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				42F069B61CA9B70A0006A15C /* IntervalPickerDataSource.h */,
+				42F069B71CA9B70A0006A15C /* IntervalPickerDataSource.m */,
+				49F366751AC41E260036BC81 /* BLUBeaconConstants.h */,
+				49F366761AC4240C0036BC81 /* BLUBeaconFormatter.h */,
+				49F366771AC4240C0036BC81 /* BLUBeaconFormatter.m */,
+				49F8AC381AC966900017FBE6 /* BLUHexKeyboard.h */,
+				49F8AC391AC966900017FBE6 /* BLUHexKeyboard.m */,
+				49F8AC3B1AC96A1F0017FBE6 /* BLUMajorMinorTextFieldHelper.h */,
+				49F8AC3C1AC96A1F0017FBE6 /* BLUMajorMinorTextFieldHelper.m */,
+				49F8AC3D1AC96A1F0017FBE6 /* BLUUUIDTextFieldHelper.h */,
+				49F8AC3E1AC96A1F0017FBE6 /* BLUUUIDTextFieldHelper.m */,
+				42517AB11B4ECEE400657215 /* NSData+String.h */,
+				42517AB21B4ECEE400657215 /* NSData+String.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49F1C3FB1ABB07F0001F8596 /* blubeacon-ios-testapp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49F1C4221ABB07F0001F8596 /* Build configuration list for PBXNativeTarget "blubeacon-ios-testapp" */;
+			buildPhases = (
+				49F1C3F81ABB07F0001F8596 /* Sources */,
+				49F1C3F91ABB07F0001F8596 /* Frameworks */,
+				49F1C3FA1ABB07F0001F8596 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "blubeacon-ios-testapp";
+			productName = "blubeacon-ios-testapp";
+			productReference = 49F1C3FC1ABB07F0001F8596 /* blubeacon-ios-testapp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		49F1C4171ABB07F0001F8596 /* blubeacon-ios-testappTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49F1C4251ABB07F0001F8596 /* Build configuration list for PBXNativeTarget "blubeacon-ios-testappTests" */;
+			buildPhases = (
+				49F1C4141ABB07F0001F8596 /* Sources */,
+				49F1C4151ABB07F0001F8596 /* Frameworks */,
+				49F1C4161ABB07F0001F8596 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				49F1C41A1ABB07F0001F8596 /* PBXTargetDependency */,
+			);
+			name = "blubeacon-ios-testappTests";
+			productName = "blubeacon-ios-testappTests";
+			productReference = 49F1C4181ABB07F0001F8596 /* blubeacon-ios-testappTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49F1C3F41ABB07F0001F8596 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Bluvision Inc.";
+				TargetAttributes = {
+					49F1C3FB1ABB07F0001F8596 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = D3C92Z6T42;
+					};
+					49F1C4171ABB07F0001F8596 = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 49F1C3FB1ABB07F0001F8596;
+					};
+				};
+			};
+			buildConfigurationList = 49F1C3F71ABB07F0001F8596 /* Build configuration list for PBXProject "blubeacon-ios-testapp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 49F1C3F31ABB07F0001F8596;
+			productRefGroup = 49F1C3FD1ABB07F0001F8596 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49F1C3FB1ABB07F0001F8596 /* blubeacon-ios-testapp */,
+				49F1C4171ABB07F0001F8596 /* blubeacon-ios-testappTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		49F1C3FA1ABB07F0001F8596 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49F1C40E1ABB07F0001F8596 /* Main.storyboard in Resources */,
+				49F1C4131ABB07F0001F8596 /* LaunchScreen.xib in Resources */,
+				490A1A9D1BB940EB0016453F /* fwload_bleTag_cc_27_nl_enc.bin in Resources */,
+				4224C24C1B3D9D5C00C7FC33 /* bleTag_cc_27_nl_enc_371.bin in Resources */,
+				4224C2501B3D9D5C00C7FC33 /* bleTag27_enc_363.bin in Resources */,
+				49F1C4101ABB07F0001F8596 /* Images.xcassets in Resources */,
+				4915D5311BBD69D5006EC380 /* bleTag_enc_363.bin in Resources */,
+				4915D5331BBD7065006EC380 /* firmware.sfw in Resources */,
+				42A295EA1C6B94AA00530B84 /* firmware-380.sfw in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49F1C4161ABB07F0001F8596 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49F1C3F81ABB07F0001F8596 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49040AE41AC2FC980069E0CD /* BLUTextFieldCell.m in Sources */,
+				49F1C42A1ABB0863001F8596 /* BLUBeaconListViewController.m in Sources */,
+				49F8AC3A1AC966900017FBE6 /* BLUHexKeyboard.m in Sources */,
+				49F1C4051ABB07F0001F8596 /* AppDelegate.m in Sources */,
+				49F366701AC41B7C0036BC81 /* BLUPickerCell.m in Sources */,
+				42F069B81CA9B70A0006A15C /* IntervalPickerDataSource.m in Sources */,
+				49040AE71AC30EDB0069E0CD /* BLUBeaconConfigurationViewController.m in Sources */,
+				49F366731AC41D9C0036BC81 /* BLUBeaconAdvancedSettingsViewController.m in Sources */,
+				42517AB31B4ECEE400657215 /* NSData+String.m in Sources */,
+				49F1C4021ABB07F0001F8596 /* main.m in Sources */,
+				49F1C40B1ABB07F0001F8596 /* BLUBeaconDetailViewController.m in Sources */,
+				49F8AC401AC96A1F0017FBE6 /* BLUUUIDTextFieldHelper.m in Sources */,
+				49F8AC371AC949F70017FBE6 /* BLUIBeaconViewController.m in Sources */,
+				49EEDDEE1AC086CC00C734BA /* BLUBeaconCell.m in Sources */,
+				42106CC71C931A9500FCCBC4 /* BLUAccelerometerSettingsTableViewController.m in Sources */,
+				49F366781AC4240C0036BC81 /* BLUBeaconFormatter.m in Sources */,
+				49F2FE441AC161410008D406 /* BLUTableViewCell.m in Sources */,
+				49F8AC3F1AC96A1F0017FBE6 /* BLUMajorMinorTextFieldHelper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49F1C4141ABB07F0001F8596 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49F1C41F1ABB07F0001F8596 /* blubeacon_ios_testappTests.m in Sources */,
+				42517AB41B4ECEE400657215 /* NSData+String.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		49F1C41A1ABB07F0001F8596 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 49F1C3FB1ABB07F0001F8596 /* blubeacon-ios-testapp */;
+			targetProxy = 49F1C4191ABB07F0001F8596 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		49F1C40C1ABB07F0001F8596 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49F1C40D1ABB07F0001F8596 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		49F1C4111ABB07F0001F8596 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49F1C4121ABB07F0001F8596 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		49F1C4201ABB07F0001F8596 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		49F1C4211ABB07F0001F8596 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		49F1C4231ABB07F0001F8596 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = D3C92Z6T42;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/blubeacon-ios-testapp",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				INFOPLIST_FILE = "blubeacon-ios-testapp/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bluvision.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		49F1C4241ABB07F0001F8596 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = D3C92Z6T42;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/blubeacon-ios-testapp",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				INFOPLIST_FILE = "blubeacon-ios-testapp/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bluvision.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		49F1C4261ABB07F0001F8596 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "blubeacon-ios-testappTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bluvision.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/blubeacon-ios-testapp.app/blubeacon-ios-testapp";
+			};
+			name = Debug;
+		};
+		49F1C4271ABB07F0001F8596 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "blubeacon-ios-testappTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bluvision.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/blubeacon-ios-testapp.app/blubeacon-ios-testapp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49F1C3F71ABB07F0001F8596 /* Build configuration list for PBXProject "blubeacon-ios-testapp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49F1C4201ABB07F0001F8596 /* Debug */,
+				49F1C4211ABB07F0001F8596 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49F1C4221ABB07F0001F8596 /* Build configuration list for PBXNativeTarget "blubeacon-ios-testapp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49F1C4231ABB07F0001F8596 /* Debug */,
+				49F1C4241ABB07F0001F8596 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49F1C4251ABB07F0001F8596 /* Build configuration list for PBXNativeTarget "blubeacon-ios-testappTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49F1C4261ABB07F0001F8596 /* Debug */,
+				49F1C4271ABB07F0001F8596 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 49F1C3F41ABB07F0001F8596 /* Project object */;
+}
