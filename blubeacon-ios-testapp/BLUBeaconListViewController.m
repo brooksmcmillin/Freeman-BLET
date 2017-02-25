@@ -11,6 +11,7 @@
 #import "BLUIBeaconViewController.h"
 #import "BLUBeaconCell.h"
 #import "BLUBeaconFormatter.h"
+#import "NSData+String.h"
 
 typedef NS_ENUM(NSUInteger, BLUBeaconListSection) {
     BLUBeaconListSectionConfigurable = 0,
@@ -120,11 +121,25 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         }
         *//*
     }
-    else */if ([beacon isKindOfClass:[BLUEddystoneUIDBeacon class]] ||
+    else */
+    
+    // Where beacons are added to the list.
+    if ([beacon isKindOfClass:[BLUEddystoneUIDBeacon class]]/* ||
              [beacon isKindOfClass:[BLUEddystoneURLBeacon class]] ||
-             [beacon isKindOfClass:[BLUEddystoneTLMBeacon class]]) {
-        [self.eddystoneBeacons addObject:beacon];
-        indexPath = [NSIndexPath indexPathForRow:self.eddystoneBeacons.count-1 inSection:BLUBeaconListSectionEddystone];
+             [beacon isKindOfClass:[BLUEddystoneTLMBeacon class]]*/)
+    {
+        
+        BLUEddystoneUIDBeacon *eddystoneBeacon = (BLUEddystoneUIDBeacon *)beacon;
+        
+      //  if(eddystoneBeacon && eddystoneBeacon.identifier)
+            NSLog(@"Test : %@\n", [eddystoneBeacon.identifier.namespaceIdentifier hexStringRepresentation]);
+        
+        if([[eddystoneBeacon.identifier.namespaceIdentifier hexStringRepresentation] isEqualToString:@"AABBCCDDEEFFAABBCCDD"])
+        {
+        
+            [self.eddystoneBeacons addObject:beacon];
+            indexPath = [NSIndexPath indexPathForRow:self.eddystoneBeacons.count-1 inSection:BLUBeaconListSectionEddystone];
+        }
     }
     /*else if ([beacon isKindOfClass:[BLUIBeacon class]]) {
         BOOL newBeacon = YES;
@@ -332,37 +347,46 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     BLUBeaconCell *cell = (BLUBeaconCell *)[tableView dequeueReusableCellWithIdentifier:@"BeaconCell" forIndexPath:indexPath];
 
     NSArray *beaconList = nil;
-    if (indexPath.section == BLUBeaconListSectionConfigurable) {
+    if (indexPath.section == BLUBeaconListSectionConfigurable)
+    {
         beaconList = self.configurableBeacons;
     }
-    else if (indexPath.section == BLUBeaconListSectionEddystone) {
+    else if (indexPath.section == BLUBeaconListSectionEddystone)
+    {
         beaconList = self.eddystoneBeacons;
     }
-    else if (indexPath.section == BLUBeaconListSectionIBeacon) {
+    else if (indexPath.section == BLUBeaconListSectionIBeacon)
+    {
         beaconList = self.iBeacons;
     }
-    else if (indexPath.section == BLUBeaconListSectionOptional) {
+    else if (indexPath.section == BLUBeaconListSectionOptional)
+    {
         beaconList = self.optionalBeacons;
     }
     BLUBeacon *beacon = beaconList[indexPath.row];
 
     NSString *cellTitle = @"Unknown beacon";
-    if ([beacon isKindOfClass:[BLUIBeacon class]]) {
+    if ([beacon isKindOfClass:[BLUIBeacon class]])
+    {
         cellTitle = ((BLUIBeacon *)beacon).proximityUUID.UUIDString;
     }
-    else {
+    else
+    {
         cellTitle = ((BLUBluetoothBeacon *)beacon).name;
     }
     
-    cell.topLabel.text = cellTitle;
+    cell.topLabel.text = [NSString stringWithFormat:@"%@ : Test2", cellTitle];
     cell.rightLabel.text = [NSString stringWithFormat:@"%li dBm", (long)[beacon.RSSI integerValue]];
-    if ([beacon isKindOfClass:[BLUMotionBeacon class]]) {
+    if ([beacon isKindOfClass:[BLUMotionBeacon class]])
+    {
         cell.bottomLabel.text = @"Motion Beacon";
     }
-    else if ([beacon isKindOfClass:[BLULightSensorBeacon class]]) {
+    else if ([beacon isKindOfClass:[BLULightSensorBeacon class]])
+    {
         cell.bottomLabel.text = @"Light Sensor Beacon";
     }
-    else {
+    else
+    {
         cell.bottomLabel.text = [NSString stringWithFormat:@"Distance: %@", [BLUBeaconFormatter titleForBeaconDistance:beacon.distance]];
     }
     
@@ -406,7 +430,7 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         case BLUBeaconListSectionConfigurable:
             return self.configurableBeacons.count > 0 ? @"Configurable Beacons" : nil;
         case BLUBeaconListSectionEddystone:
-            return self.eddystoneBeacons.count > 0 ? @"eddystoneBeacons" : nil;
+            return self.eddystoneBeacons.count > 0 ? @"Boxes Near Me" : nil;
         case BLUBeaconListSectionIBeacon:
             return self.iBeacons.count > 0 ? @"iBeacons" : nil;
         case BLUBeaconListSectionOptional:
@@ -470,24 +494,31 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     [self insertNewBeacon:beacon];
 }
 
-- (void)beaconManager:(BLUBeaconManager *)manager beacon:(BLUBeacon *)beacon didChangeDistance:(BLUDistance)distance {
+- (void)beaconManager:(BLUBeaconManager *)manager beacon:(BLUBeacon *)beacon didChangeDistance:(BLUDistance)distance
+    {
     BLUBluetoothBeacon *bBeacon = (BLUBluetoothBeacon *)beacon;
     NSIndexPath *indexPath = nil;
-    if ([self.configurableBeacons containsObject:beacon]) {
+    if ([self.configurableBeacons containsObject:beacon])
+    {
         NSInteger row = [self.configurableBeacons indexOfObject:beacon];
-        if (row != NSNotFound && row < [self.configurableBeacons count]) {
+        if (row != NSNotFound && row < [self.configurableBeacons count])
+        {
             indexPath = [NSIndexPath indexPathForRow:row inSection:BLUBeaconListSectionConfigurable];
         }
     }
-    else if ([self.eddystoneBeacons containsObject:beacon]) {
+    else if ([self.eddystoneBeacons containsObject:beacon])
+    {
         NSInteger row = [self.eddystoneBeacons indexOfObject:beacon];
-        if (row != NSNotFound && row < [self.eddystoneBeacons count]) {
+        if (row != NSNotFound && row < [self.eddystoneBeacons count])
+        {
             indexPath = [NSIndexPath indexPathForRow:row inSection:BLUBeaconListSectionEddystone];
         }
     }
-    else if ([self.optionalBeacons containsObject:beacon]) {
+    else if ([self.optionalBeacons containsObject:beacon])
+    {
         NSInteger row = [self.optionalBeacons indexOfObject:beacon];
-        if (row != NSNotFound && row < [self.optionalBeacons count]) {
+        if (row != NSNotFound && row < [self.optionalBeacons count])
+        {
             indexPath = [NSIndexPath indexPathForRow:row inSection:BLUBeaconListSectionOptional];
         }
     }
@@ -507,7 +538,6 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     {
         BLUBeaconCell *cell = (BLUBeaconCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         
-        BLUEddystoneUIDBeacon *eddystoneBeacon = (BLUEddystoneUIDBeacon *)bBeacon;
         cell.topLabel.text = [NSString stringWithFormat:@"%@ : Test", bBeacon.name];
         cell.rightLabel.text = [NSString stringWithFormat:@"%li dBm", (long)[bBeacon.RSSI integerValue]];
         if (![beacon isKindOfClass:[BLUMotionBeacon class]] &&
@@ -581,19 +611,29 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     }
 }
 
-- (void)beaconManager:(BLUBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
-    for (BLUIBeacon *beacon in beacons) {
-        if (![self.iBeacons containsObject:beacon]) {
-            [self insertNewBeacon:beacon];
-        }
-        else {
-            NSInteger row = [self.iBeacons indexOfObject:beacon];
-            if (row != NSNotFound && row < [self.iBeacons count]) {
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:2];
-                BLUBeaconCell *cell = (BLUBeaconCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-                cell.topLabel.text = ((BLUIBeacon *)beacon).proximityUUID.UUIDString;
-                cell.rightLabel.text = [NSString stringWithFormat:@"%li dBm", (long)[beacon.RSSI integerValue]];
-                cell.bottomLabel.text = [NSString stringWithFormat:@"Distance: %@", [BLUBeaconFormatter titleForBeaconDistance:beacon.distance]];
+- (void)beaconManager:(BLUBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
+{
+    for (BLUIBeacon *beacon in beacons)
+    {
+        if([beacon isKindOfClass:[BLUEddystoneUIDBeacon class]])
+        {
+            BLUEddystoneUIDBeacon *eddystoneBeacon = (BLUEddystoneUIDBeacon *)beacon;
+            
+            if (![self.iBeacons containsObject:beacon])
+            {
+                [self insertNewBeacon:beacon];
+            }
+            else
+            {
+                NSInteger row = [self.iBeacons indexOfObject:beacon];
+                if (row != NSNotFound && row < [self.iBeacons count])
+                {
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:2];
+                    BLUBeaconCell *cell = (BLUBeaconCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+                    cell.topLabel.text = ((BLUIBeacon *)beacon).proximityUUID.UUIDString;
+                    cell.rightLabel.text = [NSString stringWithFormat:@"%li dBm", (long)[beacon.RSSI integerValue]];
+                    cell.bottomLabel.text = [NSString stringWithFormat:@"Distance: %@", /*[BLUBeaconFormatter titleForBeaconDistance:beacon.distance]*/ eddystoneBeacon.name];
+                }
             }
         }
     }
