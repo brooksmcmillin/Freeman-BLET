@@ -584,7 +584,7 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         
        // NSLog(@"Refreshing2?\n");
         [self insertCheckin:deviceName beaconID:outVal];
-        cell.topLabel.text = [self getName:eddystoneBeacon];
+       // cell.topLabel.text = [self getName:eddystoneBeacon];
         cell.rightLabel.text = [NSString stringWithFormat:@"%li dBm", (long)[bBeacon.RSSI integerValue]];
         if (![beacon isKindOfClass:[BLUMotionBeacon class]] &&
             ![beacon isKindOfClass:[BLULightSensorBeacon class]]) {
@@ -729,7 +729,26 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     NSScanner* scanner = [NSScanner scannerWithString:[eddystoneBeacon.identifier.instanceIdentifier hexStringRepresentation]];
     [scanner scanHexInt:&outVal];
     
-    return [NSString stringWithFormat:@"Box #%d", outVal];
+    NSString *post = [NSString stringWithFormat:@"beaconID=%d", outVal];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:@"http://freeman.brooksmcmillin.com/api/getdata.php"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    //   NSLog(@"Response: %@", [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding] );
+    
+    // NSData *jsonData = [[[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options: NSJSONReadingMutableContainers error:&error];
+    
+    return [NSString stringWithFormat:@"Box #%d: %@", outVal, (NSString *)jsonObject[0][0]];
 }
 
 -(void) insertCheckin: (NSString *) deviceName beaconID:(int) beaconID
