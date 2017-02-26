@@ -13,7 +13,9 @@
 
 @end
 
-@implementation AppDelegate
+@implementation AppDelegate{
+    int beaconNo;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

@@ -836,7 +836,7 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     latitude = newLocation.coordinate.latitude;
     longitude = newLocation.coordinate.longitude;
     
-     NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+  //   NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
 }
 
 

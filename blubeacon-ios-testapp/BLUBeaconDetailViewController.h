@@ -14,5 +14,7 @@
 @property (nonatomic, strong) BLUBeaconManager  *beaconManager;
 @property (nonatomic, strong) BLUBeacon         *beacon;
 
+-(IBAction)takePicture:(UIButton *)sender;;
+
 @end
 

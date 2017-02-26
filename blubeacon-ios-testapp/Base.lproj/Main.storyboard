@@ -441,7 +441,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" tag="99" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9AT-Wa-hbV">
-                                                    <rect key="frame" x="240" y="6" width="121" height="30"/>
+                                                    <rect key="frame" x="125" y="5" width="121" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Save Changes"/>
                                                 </button>
@@ -458,9 +458,9 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="tu7-Im-cxz">
-                        <barButtonItem key="rightBarButtonItem" title="Connect" id="xOo-tF-bHO">
+                        <barButtonItem key="rightBarButtonItem" title="Take Picture" id="xOo-tF-bHO">
                             <connections>
-                                <action selector="connectToBeacon:" destination="INR-B1-hST" id="l5C-6W-JEQ"/>
+                                <segue destination="W3D-Tm-km5" kind="show" id="tSz-0z-9du"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1224,6 +1224,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pic-nW-yxk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2246" y="429"/>
+        </scene>
+        <!--Camera View Controller-->
+        <scene sceneID="V3s-y5-6Zw">
+            <objects>
+                <viewController id="W3D-Tm-km5" customClass="CameraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6WQ-ZM-0Zp"/>
+                        <viewControllerLayoutGuide type="bottom" id="IHv-W8-Gw2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A69-7W-muG" customClass="UIImageView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1700"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8MC-CA-DhR">
+                                <rect key="frame" x="0.0" y="72" width="376" height="500"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVG-6g-yxo">
+                                <rect key="frame" x="49" y="592" width="109" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Take Picture"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="W3D-Tm-km5" eventType="touchDown" id="vs3-8y-NuX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYk-Dn-qwg">
+                                <rect key="frame" x="193" y="603" width="113" height="10"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Choose Picture"/>
+                                <connections>
+                                    <action selector="selectPhoto:" destination="W3D-Tm-km5" eventType="touchDown" id="Q72-Y2-XVg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gjw-92-hJq">
+                                <rect key="frame" x="152" y="631" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="done:" destination="W3D-Tm-km5" eventType="touchDown" id="guL-Gb-zmV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="8MC-CA-DhR" id="AmR-pa-4oW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="faW-wS-2U6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3732.8000000000002" y="1183.8080959520241"/>
         </scene>
         <!--Accelerometer Settings-->
         <scene sceneID="rZb-ET-xv6">

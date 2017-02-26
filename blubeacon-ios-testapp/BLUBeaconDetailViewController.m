@@ -14,6 +14,8 @@
 #import "BLUPickerCell.h"
 #import "BLUBeaconFormatter.h"
 #import "NSData+String.h"
+#import "CameraViewController.h"
+#import "BeaconNo.h"
 
 NSString * const BLUStoredConfigurationsArrayPath       = @"storedConfigurationsArray.plist";
 NSString * const BLUStoredConfigurationIdentifierKey    = @"BLUStoredConfigurationIdentifier";
@@ -85,6 +87,8 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     CLLocationManager *locationManager;
     float latitude;
     float longitude;
+    
+    CameraViewController* acontollerobject;
 
 }
 
@@ -152,6 +156,9 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     NSScanner* scanner = [NSScanner scannerWithString:[eddystoneBeacon.identifier.instanceIdentifier hexStringRepresentation]];
     [scanner scanHexInt:&outVal];
     
+    //test2 = [NSNumber numberWithInt:outVal];
+    [BeaconNo instance].bNo = outVal;
+    
     _outVal = outVal;
     
     [self getCustomData:outVal];
@@ -177,6 +184,10 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     [saveButton addTarget:self
                    action:@selector(saveData)
          forControlEvents:UIControlEventTouchUpInside];
+    
+   /* [[self connectButton] addTarget:self
+                      action:@select(takePicture)
+            forControlEvents:[UIControlEventTouchUpInside];*/
     
 }
 
@@ -321,8 +332,11 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     // Dispose of any resources that can be recreated.
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"pushConfiguration"]) {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([segue.identifier isEqualToString:@"pushConfiguration"])
+    {
         BLUBeaconConfigurationViewController *viewController = (BLUBeaconConfigurationViewController *)segue.destinationViewController;
         viewController.configurationType = ((NSNumber *)sender).unsignedIntegerValue;
     }
@@ -797,4 +811,12 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     
     [locationManager stopUpdatingLocation];
 }
+
+-(void)sendDataToA:(NSString *)data
+{
+    NSLog(@"In send data function.");
+    // data will come here inside of ViewControllerA
+}
+
+
 @end

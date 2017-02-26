@@ -37,6 +37,8 @@
 		49F8AC3A1AC966900017FBE6 /* BLUHexKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AC391AC966900017FBE6 /* BLUHexKeyboard.m */; };
 		49F8AC3F1AC96A1F0017FBE6 /* BLUMajorMinorTextFieldHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AC3C1AC96A1F0017FBE6 /* BLUMajorMinorTextFieldHelper.m */; };
 		49F8AC401AC96A1F0017FBE6 /* BLUUUIDTextFieldHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8AC3E1AC96A1F0017FBE6 /* BLUUUIDTextFieldHelper.m */; };
+		98FBA6401E62DBF1009C50F8 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98FBA63F1E62DBF1009C50F8 /* CameraViewController.m */; };
+		98FBA6431E62F2A5009C50F8 /* BeaconNo.m in Sources */ = {isa = PBXBuildFile; fileRef = 98FBA6421E62F2A5009C50F8 /* BeaconNo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,10 @@
 		49F8AC3D1AC96A1F0017FBE6 /* BLUUUIDTextFieldHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUUUIDTextFieldHelper.h; sourceTree = "<group>"; };
 		49F8AC3E1AC96A1F0017FBE6 /* BLUUUIDTextFieldHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUUUIDTextFieldHelper.m; sourceTree = "<group>"; };
 		8D62DB73725BF8A550F28DA5 /* Bluvision.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; path = Bluvision.framework; sourceTree = "<group>"; };
+		98FBA63E1E62DBF1009C50F8 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		98FBA63F1E62DBF1009C50F8 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		98FBA6411E62F2A5009C50F8 /* BeaconNo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconNo.h; sourceTree = "<group>"; };
+		98FBA6421E62F2A5009C50F8 /* BeaconNo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconNo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +187,10 @@
 				49F1C40F1ABB07F0001F8596 /* Images.xcassets */,
 				49F1C4111ABB07F0001F8596 /* LaunchScreen.xib */,
 				49F1C3FF1ABB07F0001F8596 /* Supporting Files */,
+				98FBA63E1E62DBF1009C50F8 /* CameraViewController.h */,
+				98FBA63F1E62DBF1009C50F8 /* CameraViewController.m */,
+				98FBA6411E62F2A5009C50F8 /* BeaconNo.h */,
+				98FBA6421E62F2A5009C50F8 /* BeaconNo.m */,
 			);
 			path = "blubeacon-ios-testapp";
 			sourceTree = "<group>";
@@ -353,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49040AE41AC2FC980069E0CD /* BLUTextFieldCell.m in Sources */,
+				98FBA6401E62DBF1009C50F8 /* CameraViewController.m in Sources */,
 				49F1C42A1ABB0863001F8596 /* BLUBeaconListViewController.m in Sources */,
 				49F8AC3A1AC966900017FBE6 /* BLUHexKeyboard.m in Sources */,
 				49F1C4051ABB07F0001F8596 /* AppDelegate.m in Sources */,
@@ -369,6 +380,7 @@
 				42106CC71C931A9500FCCBC4 /* BLUAccelerometerSettingsTableViewController.m in Sources */,
 				49F366781AC4240C0036BC81 /* BLUBeaconFormatter.m in Sources */,
 				49F2FE441AC161410008D406 /* BLUTableViewCell.m in Sources */,
+				98FBA6431E62F2A5009C50F8 /* BeaconNo.m in Sources */,
 				49F8AC3F1AC96A1F0017FBE6 /* BLUMajorMinorTextFieldHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
