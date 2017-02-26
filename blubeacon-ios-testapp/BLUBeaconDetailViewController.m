@@ -73,6 +73,8 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
 
     id   _rotatingIBeaconNotifier;
     
+    int _outVal;
+    
     BOOL _showsTimeoutPicker;
     BOOL _showsErrorCell;
     
@@ -145,23 +147,19 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     NSScanner* scanner = [NSScanner scannerWithString:[eddystoneBeacon.identifier.instanceIdentifier hexStringRepresentation]];
     [scanner scanHexInt:&outVal];
     
+    _outVal = outVal;
+    
     [self getCustomData:outVal];
     
     self.title = [NSString stringWithFormat:@"Box #%d Details", outVal];
     self.eddystoneNamespaceCell.detailTextLabel.text = [eddystoneBeacon.identifier.namespaceIdentifier hexStringRepresentation] ?: @"Unknown";
     self.eddystoneInstanceCell.detailTextLabel.text = [eddystoneBeacon.identifier.instanceIdentifier hexStringRepresentation] ?: @"Unknown";
     
-    // Content Cell
-    self.eddystoneURLCell.detailTextLabel.text = @"Content Data";
-    UITextField *locationTextBox =  (UITextField*)[self.eddystoneURLCell viewWithTag:99];
-  //  locationTextBox.text = @"Content Data";
-    
-    // Cell for Location
-    UITextField *contentTextBox = (UITextField *)[self.eddystoneCounterCell viewWithTag:99];
-  //  contentTextBox.text = @"Location Data";
-    
     UIButton *saveButton = (UIButton *)[self.saveCell viewWithTag:99];
-    saveButton.center = CGPointMake(_saveCell.contentView.bounds.size.width/2, _saveCell.contentView.bounds.size.height/2);
+    [saveButton addTarget:self
+                   action:@selector(saveData)
+         forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 -(void) getCustomData:(int) beaconID
@@ -222,6 +220,51 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
      }*/
     }
     return;
+}
+
+-(void)saveData
+{
+    NSLog(@"Saving Data");
+        int beaconID = _outVal;
+    
+        //  NSLog(@"Checking In: %@ :: %d", deviceName, beaconID);
+    
+        // Content Cell
+        self.eddystoneURLCell.detailTextLabel.text = @"Content Data";
+        UITextField *locationTextBox =  (UITextField*)[self.eddystoneURLCell viewWithTag:99];
+
+        // Cell for Location
+        UITextField *contentTextBox = (UITextField *)[self.eddystoneCounterCell viewWithTag:99];
+
+    
+        NSString *post = [NSString stringWithFormat:@"beaconID=%d&contents=%@&location=%@", beaconID, contentTextBox.text, locationTextBox.text];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:@"http://freeman.brooksmcmillin.com/api/updatedata.php"]];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:postData];
+        
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        
+        NSURLResponse * response = nil;
+        NSError * error = nil;
+        /*  NSData * data = [NSURLConnection sendSynchronousRequest:request
+         returningResponse:&response
+         error:&error];
+         
+         if (error == nil)
+         {
+         NSLog([NSString stringWithFormat:@"Response: %@", response]);
+         }
+         else
+         {
+         NSLog([NSString stringWithFormat:@"Error: %@", error]);
+         }
+         */
+
 }
 
 
