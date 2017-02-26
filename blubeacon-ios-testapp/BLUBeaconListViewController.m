@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, BLUBeaconListSection) {
 
 NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification = @"BLUBeaconListViewControllerDidUpdateRotatingIBeacon";
 
-@interface BLUBeaconListViewController () <BLUBeaconManagerDelegate, BLUIBeaconViewControllerDelegate>
+@interface BLUBeaconListViewController () <BLUBeaconManagerDelegate, BLUIBeaconViewControllerDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong)           NSMutableArray    *configurableBeacons;
 @property (nonatomic, strong)           NSMutableArray    *eddystoneBeacons;
@@ -43,6 +43,10 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
 @implementation BLUBeaconListViewController
 {
     int lastUpdate[3];
+    
+    CLLocationManager *locationManager;
+    float latitude;
+    float longitude;
 }
 
 - (void)awakeFromNib {
@@ -59,6 +63,17 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     lastUpdate[0] = 0;
     lastUpdate[1] = 0;
     lastUpdate[2] = 0;
+    
+    // Location Data
+    latitude = 0;
+    longitude = 0;
+    locationManager = [[CLLocationManager alloc] init];
+    [locationManager requestWhenInUseAuthorization];
+    locationManager.delegate = self;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
+
     
     self.beaconManager = [[BLUBeaconManager alloc] initWithDelegate:self];
     BLUBeaconFilter *beaconFilter = [[BLUBeaconFilter alloc] init];
@@ -772,7 +787,7 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         NSLog(@"%d :: %d", lastTimestamp, (NSInteger)timeStamp );
         lastUpdate[beaconID - 1] = timeStamp;
     
-    NSString *post = [NSString stringWithFormat:@"deviceName=%@&beaconID=%d",deviceName, beaconID];
+    NSString *post = [NSString stringWithFormat:@"deviceName=%@&beaconID=%d&latitude=%f&longitude=%f",deviceName, beaconID, latitude, longitude];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -814,5 +829,15 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     }];
     return [parts componentsJoinedByString: @"&"];
 }
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation* newLocation = (CLLocation*) [locations lastObject];
+    latitude = newLocation.coordinate.latitude;
+    longitude = newLocation.coordinate.longitude;
+    
+     NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+}
+
 
 @end
