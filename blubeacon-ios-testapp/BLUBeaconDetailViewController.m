@@ -83,6 +83,8 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     NSInteger _timeoutMinutes;
     
     CLLocationManager *locationManager;
+    float latitude;
+    float longitude;
 
 }
 
@@ -155,6 +157,8 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     [self getCustomData:outVal];
     
     // Location Data
+    latitude = 0;
+    longitude = 0;
     locationManager = [[CLLocationManager alloc] init];
     [locationManager requestWhenInUseAuthorization];
     locationManager.delegate = self;
@@ -250,7 +254,7 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
         UITextField *contentTextBox = (UITextField *)[self.eddystoneURLCell viewWithTag:99];
 
     
-        NSString *post = [NSString stringWithFormat:@"beaconID=%d&contents=%@&location=%@", beaconID, contentTextBox.text, locationTextBox.text];
+        NSString *post = [NSString stringWithFormat:@"beaconID=%d&contents=%@&location=%@&latitude=%f&longitude=%f", beaconID, contentTextBox.text, locationTextBox.text, latitude, longitude];
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -782,8 +786,10 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
  {
      CLLocation* newLocation = (CLLocation*) [locations lastObject];
+     latitude = newLocation.coordinate.latitude;
+     longitude = newLocation.coordinate.longitude;
      
-    NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+   // NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
     
     // Cell for Location
     UILabel *coordLabel = (UILabel *)[self.locationCell viewWithTag:99];

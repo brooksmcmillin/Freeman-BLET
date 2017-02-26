@@ -41,6 +41,9 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
 @end
 
 @implementation BLUBeaconListViewController
+{
+    int lastUpdate[3];
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -53,9 +56,13 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    lastUpdate[0] = 0;
+    lastUpdate[1] = 0;
+    lastUpdate[2] = 0;
+    
     self.beaconManager = [[BLUBeaconManager alloc] initWithDelegate:self];
     BLUBeaconFilter *beaconFilter = [[BLUBeaconFilter alloc] init];
-
+    
     [self.beaconManager addFilter:beaconFilter];
 }
 
@@ -754,6 +761,16 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
 -(void) insertCheckin: (NSString *) deviceName beaconID:(int) beaconID
 {
   //  NSLog(@"Checking In: %@ :: %d", deviceName, beaconID);
+    NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+    // NSTimeInterval is defined as double
+    
+    // Check timestamp
+    int lastTimestamp = lastUpdate[beaconID - 1];
+    int timeInterval = 60*5;
+    if(lastTimestamp == 0 || (timeStamp - lastTimestamp) > timeInterval)
+    {
+        NSLog(@"%d :: %d", lastTimestamp, (NSInteger)timeStamp );
+        lastUpdate[beaconID - 1] = timeStamp;
     
     NSString *post = [NSString stringWithFormat:@"deviceName=%@&beaconID=%d",deviceName, beaconID];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
@@ -782,6 +799,7 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         NSLog([NSString stringWithFormat:@"Error: %@", error]);
     }
     */
+    }
     }
 
 -(NSString*) NSStringFromQueryParameters: (NSDictionary*) queryParameters
