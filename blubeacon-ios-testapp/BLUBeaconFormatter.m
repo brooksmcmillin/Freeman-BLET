@@ -160,11 +160,11 @@
 + (NSString *)titleForBeaconDistance:(BLUDistance)beaconDistance {
     switch (beaconDistance) {
         case BLUDistanceFar:
-            return @"Far";
+            return @"> 2 meters (6.5 feet)";
         case BLUDistanceNear:
-            return @"Near";
+            return @"Between .5 meters and 2 meters (1.6 - 6.5 feet)";
         case BLUDistanceImminent:
-            return @"Imminent";
+            return @"< .5 meters (1.6 feet)";
         case BLUDistanceUnknown:
         default:
             return @"Unknown";

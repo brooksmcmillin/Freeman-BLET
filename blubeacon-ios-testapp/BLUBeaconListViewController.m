@@ -558,6 +558,23 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         NSScanner* scanner = [NSScanner scannerWithString:[eddystoneBeacon.identifier.instanceIdentifier hexStringRepresentation]];
         [scanner scanHexInt:&outVal];
         
+        // Change cell color
+        long distance = (long)[bBeacon.RSSI integerValue];
+        if(distance < -80)
+        {
+            cell.backgroundColor = [UIColor redColor];
+        }
+        else if(distance < -60)
+        {
+            cell.backgroundColor = [UIColor yellowColor];
+        }
+        else
+        {
+            cell.backgroundColor = [UIColor whiteColor];
+        }
+        
+        NSLog(@"Distance: %ld", distance);
+        
         NSLog(@"Refreshing2?\n");
         [self insertCheckin:deviceName beaconID:outVal];
         cell.topLabel.text = [self getName:eddystoneBeacon];
@@ -726,7 +743,7 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     
     NSURLResponse * response = nil;
     NSError * error = nil;
-    NSData * data = [NSURLConnection sendSynchronousRequest:request
+  /*  NSData * data = [NSURLConnection sendSynchronousRequest:request
                                           returningResponse:&response
                                                       error:&error];
     
@@ -738,43 +755,8 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
     {
         NSLog([NSString stringWithFormat:@"Error: %@", error]);
     }
-    
-    if(conn)
-        NSLog(@"Success?");
-    else
-        NSLog(@"Error?");
-    
-   /* NSURL* URL = [NSURL URLWithString:@"http://freeman.brooksmcmillin.com/api/checkin.php"];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
-    request.HTTPMethod = @"POST";
-    // Form URL-Encoded Body
-    
-    NSDictionary* bodyParameters = @{
-                                     @"deviceName": deviceName,
-                                     @"beaconID": [NSString stringWithFormat:@"%d", beaconID]
-                                     };
-    request.HTTPBody = [[self NSStringFromQueryParameters:bodyParameters] dataUsingEncoding:NSUTF8StringEncoding];
-    
-    // Connection
-    
-    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:nil];
-    [connection start];
-    
-    // Initialize the NSURLConnection and proceed as described in
-    // Retrieving the Contents of a URL
-    
-   /* NSString *post = [NSString stringWithFormat:@"deviceName=%@&beaconID=%d", deviceName, beaconID];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:@"http://freeman.brooksmcmillin.com/api/checkin.php"]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];*/
-}
+    */
+    }
 
 -(NSString*) NSStringFromQueryParameters: (NSDictionary*) queryParameters
 {

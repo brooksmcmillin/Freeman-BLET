@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Bluvision Inc. All rights reserved.
 //
 
+
 #import <UIKit/UIKit.h>
 #import <Bluvision/Bluvision.h>
 @class BLUIBeaconViewController;
