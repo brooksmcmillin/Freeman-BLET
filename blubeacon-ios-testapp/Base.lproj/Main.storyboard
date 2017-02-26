@@ -313,7 +313,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="7re-xT-bro">
-                            <rect key="frame" x="0.0" y="286" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="330" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
@@ -368,8 +368,25 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="do1-nW-2yv" detailTextLabel="odn-Pt-0Mz" rowHeight="44" style="IBUITableViewCellStyleSubtitle" id="b6l-vv-EiU" customClass="BLUTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="Szq-4P-rkP" userLabel="Coordinate Cell" customClass="BLUTableViewCell">
                                         <rect key="frame" x="0.0" y="144" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Szq-4P-rkP" id="ZLH-PD-WHk">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="99" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Coordinates:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udS-M4-VPo">
+                                                    <rect key="frame" x="17" y="11" width="575" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="do1-nW-2yv" detailTextLabel="odn-Pt-0Mz" rowHeight="44" style="IBUITableViewCellStyleSubtitle" id="b6l-vv-EiU" customClass="BLUTableViewCell">
+                                        <rect key="frame" x="0.0" y="188" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b6l-vv-EiU" id="Ahc-0n-1V4">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -393,7 +410,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="OWk-L0-srf" detailTextLabel="JL4-0I-zlF" rowHeight="44" style="IBUITableViewCellStyleSubtitle" id="qbj-V5-5yB" customClass="BLUTableViewCell">
-                                        <rect key="frame" x="0.0" y="188" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="232" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qbj-V5-5yB" id="99d-Te-ahX">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -417,7 +434,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="LyG-0t-6NZ" userLabel="Save Cell" customClass="BLUTableViewCell">
-                                        <rect key="frame" x="0.0" y="232" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="276" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LyG-0t-6NZ" id="4Td-i4-32I">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -455,6 +472,7 @@
                         <outlet property="eddystoneInstanceCell" destination="qbj-V5-5yB" id="OEA-If-IiK"/>
                         <outlet property="eddystoneNamespaceCell" destination="b6l-vv-EiU" id="w5a-iJ-QVp"/>
                         <outlet property="eddystoneURLCell" destination="Xxf-zj-z12" id="27B-xT-es4"/>
+                        <outlet property="locationCell" destination="Szq-4P-rkP" id="ALs-RV-t84"/>
                         <outlet property="saveCell" destination="LyG-0t-6NZ" id="rth-5x-EeI"/>
                         <segue destination="pSg-7t-25s" kind="show" identifier="pushConfiguration" id="xPO-9Z-ak4"/>
                     </connections>

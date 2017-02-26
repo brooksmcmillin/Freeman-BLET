@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     BLUBeaconFirmwareUpdateStageUpdate
 };
 
-@interface BLUBeaconDetailViewController () <BLUConfigurableBeaconDelegate, BLUSEncryptedBeaconDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate>
+@interface BLUBeaconDetailViewController () <BLUConfigurableBeaconDelegate, BLUSEncryptedBeaconDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate, CLLocationManagerDelegate>
 @property (nonatomic, weak)     IBOutlet    UIBarButtonItem         *connectButton;
 
 @property (nonatomic, weak)     IBOutlet    BLUTableViewCell        *locationCell;
@@ -81,8 +81,11 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     NSInteger _timeoutDays;
     NSInteger _timeoutHours;
     NSInteger _timeoutMinutes;
+    
+    CLLocationManager *locationManager;
+
 }
- 
+
 #pragma mark - Managing the beacon
 
 /*- (void)removeObserversForBeacon:(BLUBeacon *)beacon {
@@ -150,6 +153,17 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     _outVal = outVal;
     
     [self getCustomData:outVal];
+    
+    // Location Data
+    locationManager = [[CLLocationManager alloc] init];
+    [locationManager requestWhenInUseAuthorization];
+    locationManager.delegate = self;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
+    
+  /*  longitudeLabel.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
+    latitudeLabel.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];*/
     
     self.title = [NSString stringWithFormat:@"Box #%d Details", outVal];
     self.eddystoneNamespaceCell.detailTextLabel.text = [eddystoneBeacon.identifier.namespaceIdentifier hexStringRepresentation] ?: @"Unknown";
@@ -763,5 +777,18 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
         NSError *error;
         [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
     }*/
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+ {
+     CLLocation* newLocation = (CLLocation*) [locations lastObject];
+     
+    NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    
+    // Cell for Location
+    UILabel *coordLabel = (UILabel *)[self.locationCell viewWithTag:99];
+    coordLabel.text = [NSString stringWithFormat:@"Coordinates: (%f, %f)",newLocation.coordinate.latitude, newLocation.coordinate.longitude];
+    
+    [locationManager stopUpdatingLocation];
 }
 @end
