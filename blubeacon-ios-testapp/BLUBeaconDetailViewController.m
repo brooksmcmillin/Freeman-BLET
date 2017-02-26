@@ -145,6 +145,8 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     NSScanner* scanner = [NSScanner scannerWithString:[eddystoneBeacon.identifier.instanceIdentifier hexStringRepresentation]];
     [scanner scanHexInt:&outVal];
     
+    [self getCustomData:outVal];
+    
     self.title = [NSString stringWithFormat:@"Box #%d Details", outVal];
     self.eddystoneNamespaceCell.detailTextLabel.text = [eddystoneBeacon.identifier.namespaceIdentifier hexStringRepresentation] ?: @"Unknown";
     self.eddystoneInstanceCell.detailTextLabel.text = [eddystoneBeacon.identifier.instanceIdentifier hexStringRepresentation] ?: @"Unknown";
@@ -152,14 +154,74 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     // Content Cell
     self.eddystoneURLCell.detailTextLabel.text = @"Content Data";
     UITextField *locationTextBox =  (UITextField*)[self.eddystoneURLCell viewWithTag:99];
-    locationTextBox.text = @"Content Data";
+  //  locationTextBox.text = @"Content Data";
     
     // Cell for Location
     UITextField *contentTextBox = (UITextField *)[self.eddystoneCounterCell viewWithTag:99];
-    contentTextBox.text = @"Location Data";
+  //  contentTextBox.text = @"Location Data";
     
     UIButton *saveButton = (UIButton *)[self.saveCell viewWithTag:99];
     saveButton.center = CGPointMake(_saveCell.contentView.bounds.size.width/2, _saveCell.contentView.bounds.size.height/2);
+}
+
+-(void) getCustomData:(int) beaconID
+{
+    if(beaconID > 0)
+    {
+    
+    NSLog(@"Getting Data: %d", beaconID);
+    
+    NSString *post = [NSString stringWithFormat:@"beaconID=%d", beaconID];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:@"http://freeman.brooksmcmillin.com/api/getdata.php"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    //   NSLog(@"Response: %@", [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding] );
+    
+   // NSData *jsonData = [[[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options: NSJSONReadingMutableContainers error:&error];
+    
+    NSString* jsonString = (NSString *) jsonObject;
+    NSLog(@"Data: %@", jsonString);
+    // Content Cell
+    self.eddystoneURLCell.detailTextLabel.text = @"Content Data";
+     UITextField *locationTextBox =  (UITextField*)[self.eddystoneURLCell viewWithTag:99];
+     locationTextBox.text = (NSString *)jsonObject[0][0];
+     
+     // Cell for Location
+     UITextField *contentTextBox = (UITextField *)[self.eddystoneCounterCell viewWithTag:99];
+     contentTextBox.text = (NSString *)jsonObject[0][1];
+    
+   // NSLog(@"json DATA: %@", (NSString *)jsonObject[0][0]);
+    
+    // NSLog(@"Response Meta: %@", response);
+    
+    /*   NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+     
+     
+     NSData * data = [NSURLConnection sendSynchronousRequest:request
+     returningResponse:&response
+     error:&error];
+     
+     if (error == nil)
+     {
+     NSLog([NSString stringWithFormat:@"Response: %@", [response]]);
+     }
+     else
+     {
+     NSLog([NSString stringWithFormat:@"Error: %@", error]);
+     }*/
+    }
+    return;
 }
 
 
@@ -348,231 +410,11 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     [successAlert show];
 }
 
-#pragma mark - Firmware Management
-
-/*- (void)updateFirmware {
-    if (![self.configurableBeacon isKindOfClass:[BLUSBeacon class]] &&
-        ![self.configurableBeacon isKindOfClass:[BLUSLegacyBeacon class]] &&
-        ![self.configurableBeacon isKindOfClass:[BLUSEncryptedBeacon class]]) {
-        UIAlertView *completedAlert = [[UIAlertView alloc] initWithTitle:@"Firmware update failed" message:@"Beacon not supported" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [completedAlert show];
-        
-        return;
-    }
-    BLUSBeacon *sBeacon = (BLUSBeacon *)self.configurableBeacon;
-    BLUBeaconFirmwareUpdateStage stage = [self storedStageForConfigurableBeacon:self.configurableBeacon];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"firmware" ofType:@"sfw"];
-    NSData *firmwareFile = [NSData dataWithContentsOfFile:path];
-    
-    BLUFirmwareImage *image = [BLUFirmwareImage firmwareImageForData:firmwareFile configurableBeacon:sBeacon];
-    if (stage == BLUBeaconFirmwareUpdateStageNone) {
-        // Fresh update ...
-        if (image) {
-            if (image.isLoaderImage) {
-                stage = BLUBeaconFirmwareUpdateStageWipe;
-            }
-            else {
-                stage = BLUBeaconFirmwareUpdateStageUpdate;
-            }
-        }
-        else {
-            stage = BLUBeaconFirmwareUpdateStageUpdate;
-            image = [self stageTwoFirmwareImageForSBeacon:sBeacon];
-            if (![self checkFirmwareImageAndFail:image stage:stage]) {
-                return;
-            }
-            
-            if ([sBeacon requiresLoaderImageForFirmwareImage:image]) {
-                stage = BLUBeaconFirmwareUpdateStageWipe;
-                image = [self stageOneFirmwareImageForSBeacon:sBeacon];
-                if (![self checkFirmwareImageAndFail:image stage:stage]) {
-                    return;
-                }
-            }
-        }
-        [self startUpdatingFirmwareWithImage:image stage:stage isFirstUpdate:YES];
-    }
-    else if (stage == BLUBeaconFirmwareUpdateStageWipe) {
-        // Wiping failed before? Repeat ...
-        if (!image || !image.isLoaderImage) {
-            image = [self stageOneFirmwareImageForSBeacon:sBeacon];
-        }
-        if (![self checkFirmwareImageAndFail:image stage:stage]) {
-            return;
-        }
-        [self startUpdatingFirmwareWithImage:image stage:stage isFirstUpdate:NO];
-    }
-    else if (stage == BLUBeaconFirmwareUpdateStageUpdate) {
-        // Wiping successful, continue updating ...
-        if (!image || image.isLoaderImage) {
-            image = [self stageTwoFirmwareImageForSBeacon:sBeacon];
-        }
-        if (![self checkFirmwareImageAndFail:image stage:stage]) {
-            return;
-        }
-        [self startUpdatingFirmwareWithImage:image stage:stage isFirstUpdate:NO];
-    }
-}
-
-- (void)startUpdatingFirmwareWithImage:(BLUFirmwareImage *)image stage:(BLUBeaconFirmwareUpdateStage)stage isFirstUpdate:(BOOL)firstUpdate {
-    NSString *title = [NSString stringWithFormat:@"Updating firmware (Stage %li)\n", (long)stage];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
-    [alert show];
-    
-    [self storeFirmwareUpdateStage:stage forConfigurableBeacon:self.configurableBeacon];
-    if (firstUpdate) {
-        // Only store the current configuration if this is the first time we try updating this beacon
-        // We don't want to overwrite a stored configuration with the configuration of a loader beacon!
-        [self storeConfiguration:self.configurableBeacon.configuration forConfigurableBeacon:self.configurableBeacon];
-    }
-    [self.configurableBeacon updateFirmwareWithImage:image progress:^(float percentComplete) {
-        NSLog(@"Firmware Update Progress: %f", percentComplete);
-        alert.title = [NSString stringWithFormat:@"%@%.2f %% completed", title, percentComplete];
-    } completion:^(BOOL success, NSError *error) {
-        NSLog(@"Firmware Update completed with error: %@", error.localizedDescription);
-        if (alert.isVisible) {
-            [alert dismissWithClickedButtonIndex:alert.cancelButtonIndex animated:YES];
-        }
-        
-        [self notifyFirmwareUpdateFinishedWithError:error stage:stage];
-    }];
-}
-
-- (void)notifyFirmwareUpdateFinishedWithError:(NSError *)error stage:(BLUBeaconFirmwareUpdateStage)stage {
-    NSString *title = nil;
-    NSString *message = nil;
-    if (error) {
-        self.connectionError = error;
-        self.errorCell.textLabel.text = error.localizedDescription;
-        [self.tableView beginUpdates];
-        _showsErrorCell = YES;
-        [self.tableView endUpdates];
-        
-        title = @"Firmware update failed";
-        message = error.localizedDescription;
-    }
-    else if (stage == BLUBeaconFirmwareUpdateStageWipe) {
-        stage = BLUBeaconFirmwareUpdateStageUpdate;
-        [self storeFirmwareUpdateStage:stage forConfigurableBeacon:self.configurableBeacon];
-        title = @"Firmware update stage 1 completed";
-        message = @"Please reconnect to your beacon to initiate stage 2";
-    }
-    else {
-        title = @"Firmware update completed";
-        message = @"Your beacon has been disconnected and will reboot now.";
-      //  [self removeStoredStageForConfigurableBeacon:self.configurableBeacon];
-    }
-    
-    UIAlertView *completedAlert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [completedAlert show];
-}
-
-- (BOOL)checkFirmwareImageAndFail:(BLUFirmwareImage *)image stage:(BLUBeaconFirmwareUpdateStage)stage {
-    if (!image) {
-        NSError *error = [[NSError alloc] initWithDomain:@"BLUBeaconTestAppErrorDomain" code:1 userInfo:@{NSLocalizedDescriptionKey : @"No image found for firmware update"}];
-        [self notifyFirmwareUpdateFinishedWithError:error stage:stage];
-        
-        return NO;
-    }
-    return YES;
-}
-    
-- (BLUFirmwareImage *)stageTwoFirmwareImageForSBeacon:(BLUSBeacon *)beacon {
-    NSString *path = nil;
-    switch (beacon.device.type) {
-        case BLUDeviceTypeUnknown:
-        case BLUDeviceTypeTag24mm:
-            path = [[NSBundle mainBundle] pathForResource:@"bleTag_enc_363" ofType:@"bin"];
-            break;
-        case BLUDeviceTypeTag27mm:
-            path = [[NSBundle mainBundle] pathForResource:@"bleTag27_enc_363" ofType:@"bin"];
-            break;
-        case BLUDeviceTypeTagCC27mm:
-        case BLUDeviceTypeTagCCaa:
-            path = [[NSBundle mainBundle] pathForResource:@"bleTag_cc_27_nl_enc_371" ofType:@"bin"];
-            break;
-        case BLUDeviceTypeTagHQ:
-        case BLUDeviceTypeTagCC24mm:
-        case BLUDeviceTypeTagAA:
-        case BLUDeviceTypeBle2Wifi:
-        case BLUDeviceTypeUSB:
-        case BLUDeviceTypeNanoUSB:
-        default:
-            break;
-    }
-    
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    BLUFirmwareImage *image = [BLUFirmwareImage firmwareImageForData:data configurableBeacon:beacon];
-    
-    return image;
-}
-
-- (BLUFirmwareImage *)stageOneFirmwareImageForSBeacon:(BLUSBeacon *)beacon {
-    NSString *path = nil;
-    switch (beacon.device.type) {
-        case BLUDeviceTypeUnknown:
-        case BLUDeviceTypeTag24mm:
-            path = [[NSBundle mainBundle] pathForResource:@"bleTag_enc_363" ofType:@"bin"];
-            break;
-        case BLUDeviceTypeTag27mm:
-            path = [[NSBundle mainBundle] pathForResource:@"bleTag27_enc_363" ofType:@"bin"];
-            break;
-        case BLUDeviceTypeTagCC27mm:
-        case BLUDeviceTypeTagCCaa:
-            path = [[NSBundle mainBundle] pathForResource:@"fwload_bleTag_cc_27_nl_enc" ofType:@"bin"];
-            break;
-        case BLUDeviceTypeTagHQ:
-        case BLUDeviceTypeTagCC24mm:
-        case BLUDeviceTypeTagAA:
-        case BLUDeviceTypeBle2Wifi:
-        case BLUDeviceTypeUSB:
-        case BLUDeviceTypeNanoUSB:
-        default:
-            break;
-    }
-    
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    BLUFirmwareImage *image = [BLUFirmwareImage firmwareImageForData:data configurableBeacon:beacon];
-    
-    return image;
-}*/
-
 #pragma mark - Configurable Beacon Delegate
 
 - (void)configurableBeacon:(BLUConfigurableBeacon *)configurableBeacon didChangeState:(BLUConfigurableBeaconConnectionState)state {
     [self configureView];
 }
-
-/*- (void)configurableBeaconDidConnect:(BLUConfigurableBeacon *)configurableBeacon {
-    [configurableBeacon enableBeaconSpeaker:YES andLED:YES];
-
-    self.scheduledConfiguration = configurableBeacon.configuration;
-    self.accelerometerSettings = [BLUAccelerometerSettings defaultSettings];
-    
-    [self.tableView beginUpdates];
-    [self configureView];
-    self.connectionError = nil;
-    _showsErrorCell = NO;
-    [self.tableView endUpdates];
-    
-    [self updateTableHeaders];
-    [self updateTableFooters];
-    
-    BOOL stageAlert = NO;
-    BLUBeaconFirmwareUpdateStage stage = [self storedStageForConfigurableBeacon:self.configurableBeacon];
-    if (stage > BLUBeaconFirmwareUpdateStageNone) {
-        stageAlert = YES;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Firmware update in progress" message:@"This beacon was in the process of being updated recently. Would you like to continue this update now?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
-    }
-    
-    BLUBeaconConfiguration *config = [self storedConfigurationForConfigurableBeacon:self.configurableBeacon];
-    if (config && !stageAlert) {
-        self.storedConfiguration = config;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Configuration available" message:@"There's a stored configuration for this beacon. Would you like to apply it now?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", @"Delete Configuration", nil];
-        [alert show];
-    }
-} */
 
 - (void)configurableBeacon:(BLUConfigurableBeacon *)configurableBeacon didDisconnectWithError:(NSError *)error {
 
@@ -880,10 +722,4 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
         [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
     }*/
 }
-
--(void)getCustomData:(int) beaconID
-{
-    
-}
-
 @end

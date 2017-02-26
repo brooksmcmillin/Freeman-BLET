@@ -573,9 +573,9 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
             cell.backgroundColor = [UIColor whiteColor];
         }
         
-        NSLog(@"Distance: %ld", distance);
+      //  NSLog(@"Distance: %ld", distance);
         
-        NSLog(@"Refreshing2?\n");
+       // NSLog(@"Refreshing2?\n");
         [self insertCheckin:deviceName beaconID:outVal];
         cell.topLabel.text = [self getName:eddystoneBeacon];
         cell.rightLabel.text = [NSString stringWithFormat:@"%li dBm", (long)[bBeacon.RSSI integerValue]];
@@ -727,7 +727,7 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
 
 -(void) insertCheckin: (NSString *) deviceName beaconID:(int) beaconID
 {
-    NSLog(@"Checking In: %@ :: %d", deviceName, beaconID);
+  //  NSLog(@"Checking In: %@ :: %d", deviceName, beaconID);
     
     NSString *post = [NSString stringWithFormat:@"deviceName=%@&beaconID=%d",deviceName, beaconID];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
