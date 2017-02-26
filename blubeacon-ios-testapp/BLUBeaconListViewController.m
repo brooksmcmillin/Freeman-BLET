@@ -560,7 +560,7 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         
         // Change cell color
         long distance = (long)[bBeacon.RSSI integerValue];
-        if(distance < -80)
+       /* if(distance < -80)
         {
             cell.backgroundColor = [UIColor redColor];
         }
@@ -568,9 +568,16 @@ NSString * const BLUBeaconListViewControllerDidUpdateRotatingIBeaconNotification
         {
             cell.backgroundColor = [UIColor yellowColor];
         }
-        else
+        else*/
         {
             cell.backgroundColor = [UIColor whiteColor];
+        }
+        
+        NSString *string = [BLUBeaconFormatter titleForBeaconDistance:beacon.distance];
+        if ([string rangeOfString:@".5 meters"].location == NSNotFound) {
+           cell.backgroundColor = [UIColor whiteColor];
+        } else {
+            cell.backgroundColor = [UIColor greenColor];
         }
         
       //  NSLog(@"Distance: %ld", distance);

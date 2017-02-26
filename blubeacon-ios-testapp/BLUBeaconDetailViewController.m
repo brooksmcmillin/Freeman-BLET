@@ -192,12 +192,12 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
     NSLog(@"Data: %@", jsonString);
     // Content Cell
     self.eddystoneURLCell.detailTextLabel.text = @"Content Data";
-     UITextField *locationTextBox =  (UITextField*)[self.eddystoneURLCell viewWithTag:99];
-     locationTextBox.text = (NSString *)jsonObject[0][0];
+     UITextField *locationTextBox =  (UITextField*)[self.eddystoneCounterCell viewWithTag:99];
+     locationTextBox.text = (NSString *)jsonObject[0][1];
      
      // Cell for Location
-     UITextField *contentTextBox = (UITextField *)[self.eddystoneCounterCell viewWithTag:99];
-     contentTextBox.text = (NSString *)jsonObject[0][1];
+     UITextField *contentTextBox = (UITextField *)[self.eddystoneURLCell viewWithTag:99];
+     contentTextBox.text = (NSString *)jsonObject[0][0];
     
    // NSLog(@"json DATA: %@", (NSString *)jsonObject[0][0]);
     
@@ -230,11 +230,10 @@ typedef NS_ENUM(NSUInteger, BLUBeaconFirmwareUpdateStage) {
         //  NSLog(@"Checking In: %@ :: %d", deviceName, beaconID);
     
         // Content Cell
-        self.eddystoneURLCell.detailTextLabel.text = @"Content Data";
-        UITextField *locationTextBox =  (UITextField*)[self.eddystoneURLCell viewWithTag:99];
+        UITextField *locationTextBox =  (UITextField*)[self.eddystoneCounterCell viewWithTag:99];
 
         // Cell for Location
-        UITextField *contentTextBox = (UITextField *)[self.eddystoneCounterCell viewWithTag:99];
+        UITextField *contentTextBox = (UITextField *)[self.eddystoneURLCell viewWithTag:99];
 
     
         NSString *post = [NSString stringWithFormat:@"beaconID=%d&contents=%@&location=%@", beaconID, contentTextBox.text, locationTextBox.text];
